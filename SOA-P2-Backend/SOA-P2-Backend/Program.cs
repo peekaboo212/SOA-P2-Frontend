@@ -1,5 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Repository.Context;
+using Service.IServices;
+using Service.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+IConfiguration configuration = builder.Configuration;
+
+builder.Services.AddDbContext<ApplicationDbContext>
+    (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<IEmployee, EmployeeService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
