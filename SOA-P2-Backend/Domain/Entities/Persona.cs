@@ -22,5 +22,7 @@ namespace Domain.Entities
         public string last_name { get; set; }
         [DataType(DataType.Date)]
         public DateTime birth_date { get; set; }
+
+        public virtual ICollection<Empleado> Empleado { get; set; }
     }
 }

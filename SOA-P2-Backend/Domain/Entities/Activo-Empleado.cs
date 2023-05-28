@@ -23,5 +23,7 @@ namespace Domain.Entities
         public DateTime assignment_date { get; set; }
         public DateTime release_date { get; set; }
         public DateTime delivery_date { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Activo Activo { get; set; }
     }
 }

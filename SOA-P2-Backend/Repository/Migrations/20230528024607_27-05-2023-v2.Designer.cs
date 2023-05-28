@@ -12,8 +12,8 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230527231811_27-05-2023")]
-    partial class _27052023
+    [Migration("20230528024607_27-05-2023-v2")]
+    partial class _27052023v2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,12 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int>("Activoid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Empleadoid")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("assignment_date")
                         .HasColumnType("datetime2");
 
@@ -76,6 +82,10 @@ namespace Repository.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("Activoid");
+
+                    b.HasIndex("Empleadoid");
+
                     b.ToTable("Activo_Empleado");
                 });
 
@@ -86,6 +96,10 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("Personacurp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(18)");
 
                     b.Property<DateTime>("date_hire")
                         .HasColumnType("datetime2");
@@ -101,6 +115,8 @@ namespace Repository.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Personacurp");
 
                     b.ToTable("Empleados");
                 });
@@ -127,6 +143,51 @@ namespace Repository.Migrations
                     b.HasKey("curp");
 
                     b.ToTable("Personas");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Activo_Empleado", b =>
+                {
+                    b.HasOne("Domain.Entities.Activo", "Activo")
+                        .WithMany("Activo_Empleado")
+                        .HasForeignKey("Activoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Empleado", "Empleado")
+                        .WithMany("Activo_Empleado")
+                        .HasForeignKey("Empleadoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activo");
+
+                    b.Navigation("Empleado");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+                {
+                    b.HasOne("Domain.Entities.Persona", "Persona")
+                        .WithMany("Empleado")
+                        .HasForeignKey("Personacurp")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Activo", b =>
+                {
+                    b.Navigation("Activo_Empleado");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+                {
+                    b.Navigation("Activo_Empleado");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Persona", b =>
+                {
+                    b.Navigation("Empleado");
                 });
 #pragma warning restore 612, 618
         }

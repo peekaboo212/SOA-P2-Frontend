@@ -9,6 +9,6 @@ namespace Service.IServices
 {
     public interface IEmployee
     {
-        List<Persona> GetAll();
+        List<Empleado> GetAll();
     }
 }

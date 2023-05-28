@@ -22,5 +22,6 @@ namespace Domain.Entities
         public string description { get; set; }
         [Required]
         public bool status { get; set; }
+        public virtual ICollection<Activo_Empleado> Activo_Empleado { get; set; }
     }
 }

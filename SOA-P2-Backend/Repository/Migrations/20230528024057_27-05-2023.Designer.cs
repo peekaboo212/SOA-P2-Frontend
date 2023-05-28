@@ -12,8 +12,8 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230527233924_27-05-2023-V2")]
-    partial class _27052023V2
+    [Migration("20230528024057_27-05-2023")]
+    partial class _27052023
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,10 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<string>("Personacurp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(18)");
+
                     b.Property<DateTime>("date_hire")
                         .HasColumnType("datetime2");
 
@@ -101,6 +105,8 @@ namespace Repository.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Personacurp");
 
                     b.ToTable("Empleados");
                 });
@@ -127,6 +133,22 @@ namespace Repository.Migrations
                     b.HasKey("curp");
 
                     b.ToTable("Personas");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+                {
+                    b.HasOne("Domain.Entities.Persona", "Persona")
+                        .WithMany("Empleado")
+                        .HasForeignKey("Personacurp")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Persona", b =>
+                {
+                    b.Navigation("Empleado");
                 });
 #pragma warning restore 612, 618
         }

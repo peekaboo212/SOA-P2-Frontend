@@ -44,22 +44,6 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empleados",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    id_people = table.Column<int>(type: "int", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    date_hire = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    status = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Empleados", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Personas",
                 columns: table => new
                 {
@@ -72,6 +56,34 @@ namespace Repository.Migrations
                 {
                     table.PrimaryKey("PK_Personas", x => x.curp);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Empleados",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_people = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date_hire = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false),
+                    Personacurp = table.Column<string>(type: "nvarchar(18)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Empleados", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Empleados_Personas_Personacurp",
+                        column: x => x.Personacurp,
+                        principalTable: "Personas",
+                        principalColumn: "curp",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleados_Personacurp",
+                table: "Empleados",
+                column: "Personacurp");
         }
 
         /// <inheritdoc />

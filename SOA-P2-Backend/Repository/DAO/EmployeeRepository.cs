@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,11 @@ namespace Repository.DAO
             _context = context;
         }
 
-        public List<Persona> GetList()
+        public List<Empleado> GetList()
         {
-            List<Persona> list = new List<Persona>();
+            List<Empleado> list = new List<Empleado>();
 
-            list = _context.Personas.ToList();
+            list = _context.Empleados.Include(x => x.Persona).ToList();
 
             return list;
         }

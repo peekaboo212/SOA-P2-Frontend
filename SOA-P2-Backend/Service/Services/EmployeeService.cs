@@ -22,9 +22,9 @@ namespace Service.Services
             empleoyeeRepository = new EmployeeRepository(context);
         }
 
-        public List<Persona> GetAll()
+        public List<Empleado> GetAll()
         {
-            List<Persona> empleaoyees = new List<Persona>();
+            List<Empleado> empleaoyees = new List<Empleado>();
 
             try
             {
