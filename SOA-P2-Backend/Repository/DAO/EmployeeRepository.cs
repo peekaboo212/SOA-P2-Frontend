@@ -43,7 +43,8 @@ namespace Repository.DAO
             {
                 id_people = newEmployee.curp,
                 email = newEmployee.email,
-                date_hire = DateTime.Now
+                date_hire = DateTime.Now,
+                status = true
             });
 
             _context.SaveChanges();

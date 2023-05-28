@@ -15,10 +15,10 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         [Required]
-        [ForeignKey("Empledos")]
+        [ForeignKey("Empleado")]
         public int id_empleoyee { get; set; }
         [Required]
-        [ForeignKey("Activos")]
+        [ForeignKey("Activo")]
         public int id_activo { get; set; }
         public DateTime assignment_date { get; set; }
         public DateTime release_date { get; set; }

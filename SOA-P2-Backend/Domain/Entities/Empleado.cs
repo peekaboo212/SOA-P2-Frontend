@@ -14,7 +14,7 @@ namespace Domain.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        [ForeignKey("Personas")]
+        [ForeignKey("Persona")]
         public string id_people { get; set; }
         [Required]
         public string email { get; set; }
@@ -23,8 +23,6 @@ namespace Domain.Entities
         public DateTime date_hire { get; set; }
         [Required]
         public bool status { get; set; }
-        // Navigation property
-        [NotMapped]
         public virtual Persona Persona { get; set; }
         public virtual ICollection<Activo_Empleado> Activo_Empleado { get; set; }
     }
