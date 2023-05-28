@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Request;
+using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
 
 namespace SOA_P2_Backend.Controllers
@@ -17,6 +18,11 @@ namespace SOA_P2_Backend.Controllers
         public IActionResult Index()
         {
             return Ok(_employee.GetAll());
+        }
+        [HttpPost]
+        public IActionResult Create([FromBody] RequestPostCreateEmployee employee)
+        {
+            return Ok(_employee.CreateEmployee(employee));
         }
     }
 }

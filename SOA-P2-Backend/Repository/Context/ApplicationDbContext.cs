@@ -20,6 +20,11 @@ namespace Repository.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Empleado>()
+                .HasOne(e => e.Persona)
+                .WithOne()
+                .HasForeignKey<Empleado>(e => e.id_people);
         }
     }
 }

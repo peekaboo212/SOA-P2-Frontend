@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Request;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System;
@@ -25,6 +26,27 @@ namespace Repository.DAO
             list = _context.Empleados.Include(x => x.Persona).ToList();
 
             return list;
+        }
+
+        public void AddEmployee(RequestPostCreateEmployee newEmployee)
+        {
+            Console.WriteLine(newEmployee.name);
+            _context.Personas.Add(new Persona
+            {
+                curp = newEmployee.curp,
+                name = newEmployee.name,
+                last_name = newEmployee.last_name,
+                birth_date = DateTime.Parse(newEmployee.birth_date),
+            });
+
+            _context.Empleados.Add(new Empleado
+            {
+                id_people = newEmployee.curp,
+                email = newEmployee.email,
+                date_hire = DateTime.Now
+            });
+
+            _context.SaveChanges();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Service.IServices
     public interface IEmployee
     {
         List<Empleado> GetAll();
+        string CreateEmployee(RequestPostCreateEmployee newEmployee);
     }
 }

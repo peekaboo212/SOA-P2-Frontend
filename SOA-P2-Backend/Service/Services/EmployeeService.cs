@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Request;
 using Microsoft.Extensions.Logging;
 using Repository.Context;
 using Repository.DAO;
@@ -36,6 +37,20 @@ namespace Service.Services
             }
 
             return empleaoyees;
+        }
+
+        public string CreateEmployee(RequestPostCreateEmployee requestPostCreateEmployee)
+        {
+            try
+            {
+                empleoyeeRepository.AddEmployee(requestPostCreateEmployee);
+                return "Usuario creado";
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return "Ocurrio un error al crear el usuario";
+            }
         }
     }
 }
