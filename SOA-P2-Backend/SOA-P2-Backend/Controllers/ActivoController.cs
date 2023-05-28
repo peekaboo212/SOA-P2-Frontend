@@ -24,7 +24,7 @@ namespace SOA_P2_Backend.Controllers
         {
             return Ok(_activo.AddActivo(newActivo));
         }
-        [HttpPut]
+        [HttpPatch]
         public IActionResult Update(RequestPatchUpdateStatusActivo newStatus)
         {
             return Ok(_activo.UpdateStatusActivo(newStatus));
