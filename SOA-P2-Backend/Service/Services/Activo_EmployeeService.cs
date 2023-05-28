@@ -1,4 +1,5 @@
-﻿using Domain.Request;
+﻿using Domain.Model;
+using Domain.Request;
 using Microsoft.Extensions.Logging;
 using Repository.Context;
 using Repository.DAO;
@@ -15,11 +16,13 @@ namespace Service.Services
     {
         private readonly ILogger<Activo_EmployeeService> _logger;
         private readonly Activo_EmployeeRepository activo_EmployeeRepository;
+        private readonly IEmail _email;
 
-        public Activo_EmployeeService(ILogger<Activo_EmployeeService> logger, ApplicationDbContext context)
+        public Activo_EmployeeService(ILogger<Activo_EmployeeService> logger, ApplicationDbContext context, IEmail email)
         {
             _logger = logger;
             activo_EmployeeRepository = new Activo_EmployeeRepository(context);
+            _email = email;
         }
 
         public string AssignActivo(RequestPostAssignActivo assignActivo)
@@ -27,6 +30,12 @@ namespace Service.Services
             try
             {
                 activo_EmployeeRepository.AssignActivo(assignActivo);
+                _email.SendAssignmentActivo(new ParamsSendEmail
+                {
+                    id_activo = assignActivo.id_activo,
+                    id_empleoyee = assignActivo.id_empleoyee,
+                    deliveryDate = assignActivo.delivery_date
+                });
                 return "Activo asignado";
             }
             catch (Exception e)
@@ -41,6 +50,12 @@ namespace Service.Services
             try
             {
                 activo_EmployeeRepository.deliveryActivo(deliveryActivo);
+                _email.SendDeliveryActivo(new ParamsSendEmail
+                {
+                    id_activo = deliveryActivo.id_activo,
+                    id_empleoyee = deliveryActivo.id_empleoyee,
+                    deliveryDate = DateTime.Now.ToString("yyyy-MM-dd")
+                });
                 return "Activo entregado";
             }
             catch (Exception e)

@@ -38,6 +38,29 @@ namespace Repository.DAO
             return list;
         }
 
+        public EmpleadoVM GetEmpleadoById(int id)
+        {
+            EmpleadoVM empleadoVM = new EmpleadoVM();
+
+            empleadoVM = _context.Empleados
+                .Include(x => x.Persona)
+                .Where(x => x.num_employee == id)
+                .Select(x => new EmpleadoVM()
+                {
+                    curp = x.Persona.curp,
+                    name = x.Persona.name,
+                    last_name = x.Persona.last_name,
+                    birth_date = x.Persona.birth_date,
+                    num_employee = x.num_employee,
+                    email = x.email,
+                    date_hire = x.date_hire,
+                    status = x.status
+                })
+                .FirstOrDefault();
+
+            return empleadoVM;
+        }
+
         public void AddEmployee(RequestPostCreateEmployee newEmployee)
         {
             _context.Personas.Add(new Persona

@@ -30,6 +30,15 @@ namespace Repository.DAO
             _context.SaveChanges();
         }
 
+        public Activo GetById(int id)
+        {
+            Activo activo = new Activo();
+
+            activo = _context.Activos.FirstOrDefault(x => x.id == id);
+
+            return activo;
+        }
+
         public void UpdateStatusActivo(RequestPatchUpdateStatusActivo newStatus)
         {
             Activo activo = _context.Activos.FirstOrDefault(a => a.id == newStatus.id);

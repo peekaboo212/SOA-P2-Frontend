@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>
 builder.Services.AddTransient<IEmployee, EmployeeService>();
 builder.Services.AddTransient<IActivo, ActivoService>();
 builder.Services.AddTransient<IActivo_Employee, Activo_EmployeeService>();
+builder.Services.AddTransient<IEmail, EmailService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
