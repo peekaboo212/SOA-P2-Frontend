@@ -23,9 +23,9 @@ namespace Service.Services
             empleoyeeRepository = new EmployeeRepository(context);
         }
 
-        public List<Empleado> GetAll()
+        public List<EmpleadoVM> GetAll()
         {
-            List<Empleado> empleaoyees = new List<Empleado>();
+            List<EmpleadoVM> empleaoyees = new List<EmpleadoVM>();
 
             try
             {

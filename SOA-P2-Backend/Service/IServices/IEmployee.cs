@@ -10,7 +10,7 @@ namespace Service.IServices
 {
     public interface IEmployee
     {
-        List<Empleado> GetAll();
+        List<EmpleadoVM> GetAll();
         string CreateEmployee(RequestPostCreateEmployee newEmployee);
     }
 }

@@ -19,18 +19,27 @@ namespace Repository.DAO
             _context = context;
         }
 
-        public List<Empleado> GetList()
+        public List<EmpleadoVM> GetList()
         {
-            List<Empleado> list = new List<Empleado>();
+            List<EmpleadoVM> list = new List<EmpleadoVM>();
 
-            list = _context.Empleados.Include(x => x.Persona).ToList();
+            list = _context.Empleados.Include(x => x.Persona).Select(x => new EmpleadoVM()
+            {
+                curp = x.Persona.curp,
+                name = x.Persona.name,
+                last_name = x.Persona.last_name,
+                birth_date = x.Persona.birth_date,
+                num_employee = x.num_employee,
+                email = x.email,
+                date_hire = x.date_hire,
+                status = x.status
+            }).ToList();
 
             return list;
         }
 
         public void AddEmployee(RequestPostCreateEmployee newEmployee)
         {
-            Console.WriteLine(newEmployee.name);
             _context.Personas.Add(new Persona
             {
                 curp = newEmployee.curp,
