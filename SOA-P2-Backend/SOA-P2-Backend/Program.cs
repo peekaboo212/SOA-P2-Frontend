@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddTransient<IEmployee, EmployeeService>();
+builder.Services.AddTransient<IActivo, ActivoService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
