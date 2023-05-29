@@ -99,6 +99,26 @@ namespace Service.Services
             }
         }
 
+        public void SentNotificationDelivery(int id_activo, int id_employee, DateTime delivery)
+        {
+            DateTime releaseDate = delivery;
+            DateTime twoDaysLater = DateTime.Now.AddDays(1);
+
+            if (releaseDate.Date == twoDaysLater.Date)
+            {
+                Console.WriteLine(id_activo);
+                Console.WriteLine(id_employee);
+                Console.WriteLine(delivery);
+            }
+
+            /*MailMessage mailMessage = new MailMessage(_emailOrigin, "alexandergv2117@gmail.com");
+            mailMessage.Subject = $"Entrega del activo";
+            mailMessage.Body = $"<b>Hola,</b><br>Realizaste la entrega del activo: <b></b><br>Fecha entrega: {delivery}";
+            mailMessage.IsBodyHtml = true;
+            _smtpClient.Send(mailMessage);
+            _smtpClient.Dispose();*/
+        }
+
         private SmtpClient ConfigureSmtpClient()
         {
             string password = _configuration.GetSection("EmailCredentials:password").Value;

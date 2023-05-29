@@ -15,6 +15,12 @@ namespace SOA_P2_Backend.Controllers
         {
             _activo_Employee = activo_Employee;
         }
+        [HttpGet]
+        [Route("undelivery")]
+        public ActionResult GetAll()
+        {
+            return Ok(_activo_Employee.GetAllUndelivered());
+        }
         [HttpPost]
         public IActionResult Index([FromBody] RequestPostAssignActivo assignActivo)
         {

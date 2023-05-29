@@ -57,5 +57,14 @@ namespace Repository.DAO
                 throw new Exception("Error provocado");
             }
         }
+
+        public List<Activo_Empleado> GetAllUndelivered()
+        {
+            List<Activo_Empleado> list = new List<Activo_Empleado> ();
+
+            list = _context.Activo_Empleado.Where(x => x.delivery_date == DateTime.MinValue).ToList();
+
+            return list;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Request;
+﻿using Domain.Entities;
+using Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Service.IServices
         string AssignActivo(RequestPostAssignActivo assignActivo);
 
         string DeliveryActivo(RequestPatchDeliveryActivo deliveryActivo);
+        List<Activo_Empleado> GetAllUndelivered();
     }
 }

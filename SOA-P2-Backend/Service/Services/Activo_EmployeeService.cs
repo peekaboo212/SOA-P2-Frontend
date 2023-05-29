@@ -1,4 +1,5 @@
-﻿using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Model;
 using Domain.Request;
 using Microsoft.Extensions.Logging;
 using Repository.Context;
@@ -63,6 +64,25 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
             return "No se pudo, entregar el activo";
+        }
+
+        public List<Activo_Empleado> GetAllUndelivered()
+        {
+            List<Activo_Empleado> list = new List<Activo_Empleado>();
+
+            try
+            {
+                list = activo_EmployeeRepository.GetAllUndelivered();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    _email.SentNotificationDelivery(list[i].id_activo, list[i].id_empleoyee, list[i].release_date);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return list;
         }
     }
 }
