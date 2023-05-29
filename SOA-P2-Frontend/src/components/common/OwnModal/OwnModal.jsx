@@ -26,7 +26,7 @@ export const OwnModal = ({ children, setOpen, open }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            {children}
+          {children}
         </Box>
       </Modal>
     </div>

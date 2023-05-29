@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Employees } from "../components/employees/Employees";
-import { Assets } from "../components/assets/Assets";
-import { AssetsEmployees } from "../components/assetsEmployees/AssetsEmployees";
+import { Employees } from "../components/employees/Employees/Employees";
+import { Assets } from "../components/assets/Assets/Assets";
+import { AssetsEmployees } from "../components/assetsEmployees/AssetsEmployees/AssetsEmployees";
 
 export const MainRouter = () => {
   return (
