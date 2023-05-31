@@ -17,6 +17,7 @@ builder.Services.AddTransient<IEmployee, EmployeeService>();
 builder.Services.AddTransient<IActivo, ActivoService>();
 builder.Services.AddTransient<IActivo_Employee, Activo_EmployeeService>();
 builder.Services.AddTransient<IEmail, EmailService>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -60,6 +61,9 @@ app.MapControllers();
 var scope = app.Services.CreateScope();
 await Migrations(scope.ServiceProvider);
 
+// Agregar la tarea recurrente
+var timer = new Timer(PrintTest, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+
 app.Run();
 
 async Task Migrations(IServiceProvider serviceProvider)
@@ -79,4 +83,12 @@ async Task Migrations(IServiceProvider serviceProvider)
     {
         Console.WriteLine($"------- !! ERROR connectando: {e.Message}");
     }
+}
+
+void PrintTest(object state)
+{
+    Console.WriteLine("Enviando correo de recordatorio");
+    var activoEmployeeService = scope.ServiceProvider.GetRequiredService<IActivo_Employee>();
+
+    activoEmployeeService.GetAllUndelivered();
 }
