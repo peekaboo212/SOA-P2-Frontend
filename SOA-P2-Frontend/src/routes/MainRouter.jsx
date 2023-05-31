@@ -8,7 +8,7 @@ export const MainRouter = () => {
     <div>
     < BrowserRouter>
         <Routes>
-          <Route path="/employees" element={<Employees/>} />
+          <Route path="/" element={<Employees/>} />
           <Route path="/assets" element={<Assets/>} />
           <Route path="/assetsEmployees" element={<AssetsEmployees/>} />
         </Routes>

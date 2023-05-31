@@ -33,12 +33,10 @@ export const AssetsEmployees = () => {
       </div>
       <div className={styles.table}>
         <div className={styles.tHeader}>
-          <p>id_employee</p>
-          <p>id_Activo</p>
+          <p>Empleado</p>
+          <p>Activo</p>
           <p>assignment_date</p>
           <p>release_date</p>
-          <p>delivery_date</p>
-          <p>empleado</p>
           <p>activo</p>
           <p>Acciones</p>
         </div>
@@ -46,12 +44,10 @@ export const AssetsEmployees = () => {
           { assetsEmployees.length >= 0 ?
             assetsEmployees.map((assetsEmployees, index) => (
               <div key={index} className={styles.row}>
-                <p>{assetsEmployees.id_empleoyee}</p>
-                <p>{assetsEmployees.id_activo}</p>
+                <p>{assetsEmployees.nameEmployee}</p>
+                <p>{assetsEmployees.nameActivo}</p>
                 <p>{assetsEmployees.assignment_date}</p>
                 <p>{assetsEmployees.release_date}</p>
-                <p>{assetsEmployees.delivery_date}</p>
-                <p>{assetsEmployees.empleado}</p>
                 <p>{assetsEmployees.status === false ? 'Disponible': 'Asignado'}</p>
                 <div className={styles.btnEdit}>
                   <button>Editar</button>

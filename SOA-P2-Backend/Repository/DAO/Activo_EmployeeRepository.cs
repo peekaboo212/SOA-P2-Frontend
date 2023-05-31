@@ -67,7 +67,7 @@ namespace Repository.DAO
             list = _context.Activo_Empleado
                 .Include(x => x.Empleado)
                     .ThenInclude(e => e.Persona)
-                .Include(x => x.Activo)
+                .Include(x => x.Activo).Where(x => x.delivery_date == DateTime.MinValue)
                 .Select(x => new DataActivoEmployeeNotificationEmail
             {
                 nameEmployee = x.Empleado.Persona.name,
