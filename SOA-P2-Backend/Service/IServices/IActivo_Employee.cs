@@ -15,5 +15,6 @@ namespace Service.IServices
 
         string DeliveryActivo(RequestPatchDeliveryActivo deliveryActivo);
         List<DataActivoEmployeeNotificationEmail> GetAllUndelivered();
+        List<DataActivoEmployeeNotificationEmail> GetAllUndeliveredSendNotification();
     }
 }

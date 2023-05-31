@@ -73,6 +73,21 @@ namespace Service.Services
             try
             {
                 list = activo_EmployeeRepository.GetAllUndelivered();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return list;
+        }
+
+        public List<DataActivoEmployeeNotificationEmail> GetAllUndeliveredSendNotification()
+        {
+            List<DataActivoEmployeeNotificationEmail> list = new List<DataActivoEmployeeNotificationEmail>();
+
+            try
+            {
+                list = activo_EmployeeRepository.GetAllUndelivered();
                 for (int i = 0; i < list.Count; i++)
                 {
                     _email.SentNotificationDelivery(list[i]);

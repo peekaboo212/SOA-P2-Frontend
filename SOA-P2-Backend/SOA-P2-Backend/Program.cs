@@ -62,7 +62,25 @@ var scope = app.Services.CreateScope();
 await Migrations(scope.ServiceProvider);
 
 // Agregar la tarea recurrente
-var timer = new Timer(PrintTest, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+var timer = new Timer(PrintTest, null, TimeSpan.Zero, TimeSpan.FromMinutes(2));
+/*// Agregar la tarea recurrente para ejecutar PrintTest todos los días a las 8 am
+var now = DateTime.Now;
+var nextRunTime = new DateTime(now.Year, now.Month, now.Day, 8, 0, 0);
+
+if (now > nextRunTime)
+{
+    nextRunTime = nextRunTime.AddDays(1);
+}
+
+var timeUntilNextRun = nextRunTime - now;
+
+var timer = new System.Timers.Timer(timeUntilNextRun.TotalMilliseconds);
+timer.Elapsed += async (sender, e) =>
+{
+    await PrintTest(sender);
+    timer.Interval = TimeSpan.FromDays(1).TotalMilliseconds;
+};
+timer.Start();*/
 
 app.Run();
 
@@ -85,10 +103,18 @@ async Task Migrations(IServiceProvider serviceProvider)
     }
 }
 
+/*async Task PrintTest(object sender)
+{
+    Console.WriteLine("Enviando correo de recordatorio");
+    var activoEmployeeService = scope.ServiceProvider.GetRequiredService<IActivo_Employee>();
+
+    activoEmployeeService.GetAllUndeliveredSendNotification();
+}*/
+
 void PrintTest(object state)
 {
     Console.WriteLine("Enviando correo de recordatorio");
     var activoEmployeeService = scope.ServiceProvider.GetRequiredService<IActivo_Employee>();
 
-    activoEmployeeService.GetAllUndelivered();
+    activoEmployeeService.GetAllUndeliveredSendNotification();
 }
