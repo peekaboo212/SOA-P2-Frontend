@@ -76,7 +76,13 @@ namespace Repository.DAO
                 nameActivo = x.Activo.name,
                 description = x.Activo.description,
                 assignmentDate = x.assignment_date,
-                releseDate = x.release_date
+                releseDate = x.release_date,
+                assignment_date = x.assignment_date,
+                delivery_date = x.delivery_date,
+                id = x.id,
+                id_activo = x.id_activo,
+                id_empleoyee = x.id_empleoyee,
+                release_date = x.release_date,
             }).ToList();
 
             return list;

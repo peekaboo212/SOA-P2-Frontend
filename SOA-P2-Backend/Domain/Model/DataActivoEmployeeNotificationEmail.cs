@@ -15,5 +15,12 @@ namespace Domain.Model
         public string description { get; set; }
         public DateTime assignmentDate { get; set; }
         public DateTime releseDate { get; set; }
+
+        public int id { get; set; }
+        public int id_empleoyee { get; set; }
+        public int id_activo { get; set; }
+        public DateTime assignment_date { get; set; }
+        public DateTime release_date { get; set; }
+        public DateTime delivery_date { get; set; }
     }
 }
