@@ -52,7 +52,7 @@ export const AssetsEmployees = () => {
                 <p>{assetsEmployees.release_date}</p>
                 <p>{assetsEmployees.delivery_date}</p>
                 <p>{assetsEmployees.empleado}</p>
-                <p>{assetsEmployees.activo}</p>
+                <p>{assetsEmployees.status === false ? 'Disponible': 'Asignado'}</p>
                 <div className={styles.btnEdit}>
                   <button>Editar</button>
                 </div>

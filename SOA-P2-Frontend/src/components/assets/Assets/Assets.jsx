@@ -36,7 +36,6 @@ export const Assets = () => {
           <p>name</p>
           <p>description</p>
           <p>status</p>
-          <p>Acciones</p>
         </div>
         <div className={styles.tBody}>
           { assets.length >= 0 ?
@@ -44,10 +43,7 @@ export const Assets = () => {
               <div key={index} className={styles.row}>
                 <p>{asset.name}</p>
                 <p>{asset.description}</p>
-                <p>{asset.status}</p>
-                <div className={styles.btnEdit}>
-                  <button>Editar</button>
-                </div>
+                <p>{asset.status === false ? 'Disponible': 'Asignado'}</p>
               </div>
             )): null
           }
