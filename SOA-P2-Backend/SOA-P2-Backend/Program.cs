@@ -63,7 +63,7 @@ await Migrations(scope.ServiceProvider);
 
 // Agregar la tarea recurrente
 var timer = new Timer(PrintTest, null, TimeSpan.Zero, TimeSpan.FromMinutes(2));
-/*// Agregar la tarea recurrente para ejecutar PrintTest todos los días a las 8 am
+/*// Agregar la tarea recurrente para ejecutar PrintTest todos los dï¿½as a las 8 am
 var now = DateTime.Now;
 var nextRunTime = new DateTime(now.Year, now.Month, now.Day, 8, 0, 0);
 
@@ -89,7 +89,7 @@ async Task Migrations(IServiceProvider serviceProvider)
     var context = serviceProvider.GetService<ApplicationDbContext>();
     var conn_appdb = context.Database.GetDbConnection();
 
-    Console.WriteLine($"Conexión Actual AppDB: {conn_appdb.ToString()}  {Environment.NewLine}   {conn_appdb.ConnectionString}");
+    Console.WriteLine($"Conexiï¿½n Actual AppDB: {conn_appdb.ToString()}  {Environment.NewLine}   {conn_appdb.ConnectionString}");
     Console.WriteLine("******************************   PROBANDO ACCESO    *******************************");
 
     try
