@@ -20,3 +20,10 @@ services:
       - mssql
     ports:
       - 8080:80
+  front:
+    hostname: front
+    image: soa-p2-frontend:latest
+    depends_on:
+      - api
+    ports:
+      - 8070:5173
