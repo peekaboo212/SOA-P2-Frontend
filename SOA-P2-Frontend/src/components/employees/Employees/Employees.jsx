@@ -53,7 +53,7 @@ export const Employees = () => {
                 <p>{employee.num_employee}</p>
                 <p>{employee.curp}</p>
                 <p>{employee.date_hire}</p>
-                <p>{employee.status}</p>
+                <p>{employee.status ? 'Activo': 'No activo'}</p>
               </div>
             ))
             : null
