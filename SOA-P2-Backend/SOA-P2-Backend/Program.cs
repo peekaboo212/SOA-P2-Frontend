@@ -24,6 +24,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var proveedor = builder.Services.BuildServiceProvider();
+
+builder.Services.AddCors(opciones =>
+{
+    var frontendURL = configuration.GetValue<string>("frontend_url");
+    opciones.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 Console.WriteLine("******************************   SERVICIOS CONFIGURADOS    *******************************");
 
 var app = builder.Build();
@@ -39,6 +50,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
