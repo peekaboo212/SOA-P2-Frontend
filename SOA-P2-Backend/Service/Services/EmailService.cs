@@ -99,24 +99,27 @@ namespace Service.Services
             }
         }
 
-        public void SentNotificationDelivery(int id_activo, int id_employee, DateTime delivery)
+        public void SentNotificationDelivery(DataActivoEmployeeNotificationEmail data)
         {
-            DateTime releaseDate = delivery;
-            DateTime twoDaysLater = DateTime.Now.AddDays(1);
-
-            if (releaseDate.Date == twoDaysLater.Date)
+            try
             {
-                Console.WriteLine(id_activo);
-                Console.WriteLine(id_employee);
-                Console.WriteLine(delivery);
-            }
+                DateTime releaseDate = data.releseDate;
+                DateTime twoDaysLater = DateTime.Now.AddDays(2);
 
-            /*MailMessage mailMessage = new MailMessage(_emailOrigin, "alexandergv2117@gmail.com");
-            mailMessage.Subject = $"Entrega del activo";
-            mailMessage.Body = $"<b>Hola,</b><br>Realizaste la entrega del activo: <b></b><br>Fecha entrega: {delivery}";
-            mailMessage.IsBodyHtml = true;
-            _smtpClient.Send(mailMessage);
-            _smtpClient.Dispose();*/
+                if (releaseDate.Date == twoDaysLater.Date)
+                {
+                    MailMessage mailMessage = new MailMessage(_emailOrigin, data.email);
+                    mailMessage.Subject = $"Recordatorio del activo {data.nameActivo}";
+                    mailMessage.Body = $"<b>Hola, {data.nameEmployee} {data.lastnameEmployee}</b><br>Recordatorio de la entrega del activo: {data.nameActivo}<b></b><br>Fecha entrega: {data.releseDate}";
+                    mailMessage.IsBodyHtml = true;
+                    _smtpClient.Send(mailMessage);
+                    _smtpClient.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
 
         private SmtpClient ConfigureSmtpClient()

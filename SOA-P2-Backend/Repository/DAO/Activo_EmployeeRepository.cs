@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
+using Domain.Model;
 using Domain.Request;
+using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System;
 using System.Collections.Generic;
@@ -58,11 +60,24 @@ namespace Repository.DAO
             }
         }
 
-        public List<Activo_Empleado> GetAllUndelivered()
+        public List<DataActivoEmployeeNotificationEmail> GetAllUndelivered()
         {
-            List<Activo_Empleado> list = new List<Activo_Empleado> ();
+            List<DataActivoEmployeeNotificationEmail> list = new List<DataActivoEmployeeNotificationEmail> ();
 
-            list = _context.Activo_Empleado.Where(x => x.delivery_date == DateTime.MinValue).ToList();
+            list = _context.Activo_Empleado
+                .Include(x => x.Empleado)
+                    .ThenInclude(e => e.Persona)
+                .Include(x => x.Activo)
+                .Select(x => new DataActivoEmployeeNotificationEmail
+            {
+                nameEmployee = x.Empleado.Persona.name,
+                lastnameEmployee = x.Empleado.Persona.last_name,
+                email = x.Empleado.email,
+                nameActivo = x.Activo.name,
+                description = x.Activo.description,
+                assignmentDate = x.assignment_date,
+                releseDate = x.release_date
+            }).ToList();
 
             return list;
         }

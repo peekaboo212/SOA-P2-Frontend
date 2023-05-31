@@ -1,0 +1,22 @@
+version: '3.9'
+
+name: soa-p2
+
+services:
+  mssql:
+    hostname: mssql
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+      - MSSQL_PID=Express
+    ports:
+      - 8090:1433
+
+  api:
+    hostname: api
+    image: soa-p2-backend:latest
+    depends_on:
+      - mssql
+    ports:
+      - 8080:80

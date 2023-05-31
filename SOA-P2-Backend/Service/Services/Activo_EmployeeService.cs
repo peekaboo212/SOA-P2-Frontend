@@ -66,16 +66,16 @@ namespace Service.Services
             return "No se pudo, entregar el activo";
         }
 
-        public List<Activo_Empleado> GetAllUndelivered()
+        public List<DataActivoEmployeeNotificationEmail> GetAllUndelivered()
         {
-            List<Activo_Empleado> list = new List<Activo_Empleado>();
+            List<DataActivoEmployeeNotificationEmail> list = new List<DataActivoEmployeeNotificationEmail>();
 
             try
             {
                 list = activo_EmployeeRepository.GetAllUndelivered();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    _email.SentNotificationDelivery(list[i].id_activo, list[i].id_empleoyee, list[i].release_date);
+                    _email.SentNotificationDelivery(list[i]);
                 }
             }
             catch (Exception e)

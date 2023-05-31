@@ -13,6 +13,6 @@ namespace Service.IServices
     {
         string SendAssignmentActivo(ParamsSendEmail paramsSendEmail);
         string SendDeliveryActivo(ParamsSendEmail paramsSendEmail);
-        void SentNotificationDelivery(int id_activo, int id_employee, DateTime delivery);
+        void SentNotificationDelivery(DataActivoEmployeeNotificationEmail data);
     }
 }
